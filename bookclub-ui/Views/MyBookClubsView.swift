@@ -1,25 +1,34 @@
-//
-//  MyBookClubsView.swift
-//  bookclub-ui
-//
-//  Created by Tianna Alina Lopes on 1/10/24.
-//
-
 import SwiftUI
 
 struct MyBookClubsView: View {
+    let myEvents: [BookClubEvent] = BookClubEvent.myEvents
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("My Book Clubs Page!")
+        List {
+            ForEach(myEvents.filter { $0.isAttending }) { event in
+                VStack(alignment: .leading) {
+                    Text(event.bookClub.name)
+                        .font(.headline)
+                    Text(event.bookClub.description)
+                        .font(.subheadline)
+                    Text("Event Date: \(event.eventDate, formatter: itemFormatter)")
+                        .font(.caption)
+                }
+            }
         }
-        .padding()
+        .navigationTitle("My BookClubs")
+        .listStyle(GroupedListStyle())
     }
 }
 
-struct MyBookClubsViews_Previews: PreviewProvider {
+private let itemFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .long
+    formatter.timeStyle = .short
+    return formatter
+}()
+
+struct MyBookClubsView_Previews: PreviewProvider {
     static var previews: some View {
         MyBookClubsView()
     }

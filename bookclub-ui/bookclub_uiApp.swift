@@ -1,17 +1,20 @@
-//
-//  bookclub_uiApp.swift
-//  bookclub-ui
-//
-//  Created by Tianna Alina Lopes on 1/9/24.
-//
-
 import SwiftUI
 
 @main
 struct bookclub_uiApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
+//            LoginView()
+//            CreateProfileView()
+//            MyAccountView()
+//            MyBookClubsView()
+//            if let firstBookClub = BookClub.mockData.first {
+//                       BookClubDetailView(bookClub: firstBookClub)
+//                   } else {
+//                       Text("No BookClub Data Available")
+//                   }
+            
+                  BookClubFeedView()
         }
     }
 }
