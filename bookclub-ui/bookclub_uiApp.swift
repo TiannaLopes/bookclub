@@ -7,14 +7,14 @@ struct bookclub_uiApp: App {
 //            LoginView()
 //            CreateProfileView()
 //            MyAccountView()
-//            MyBookClubsView()
+            MyBookClubsView()
 //            if let firstBookClub = BookClub.mockData.first {
 //                       BookClubDetailView(bookClub: firstBookClub)
 //                   } else {
 //                       Text("No BookClub Data Available")
 //                   }
             
-                  BookClubFeedView()
+//                  BookClubFeedView()
         }
     }
 }
