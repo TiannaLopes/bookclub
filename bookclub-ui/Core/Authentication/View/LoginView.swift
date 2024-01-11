@@ -4,6 +4,7 @@ import SwiftUI
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
+    @EnvironmentObject var viewModel: AuthViewModel
     
     // Define the colors from your palette
     let darkMaroon = Color(hex: "3D0814")
@@ -36,7 +37,9 @@ struct LoginView: View {
                 
                 // sign in button
                 Button{
-                    print("Log user in...")
+                    Task{
+                      try await  viewModel.signIn(withEmail: email, password: password)
+                    }
                 } label:{
                     HStack{
                         Text("SIGN IN")
@@ -46,15 +49,17 @@ struct LoginView: View {
                     .foregroundColor(.white)
                     .frame(width: UIScreen.main.bounds.width - 32, height: 48)
                 }
-                .background(Color(.systemBlue))
+                .background(tan)
+                .disabled(!formIsValid)
+                .opacity(formIsValid ? 1.0 : 0.5)
                 .cornerRadius(10)
                 .padding(.top, 24)
                 
                 Spacer()
                 // sign up button
-                
                 NavigationLink{
                     SignUpView()
+                        .navigationBarBackButtonHidden(true) 
                 }label:{
                     HStack(spacing: 3){
                         Text("Don't have an account?")
@@ -65,8 +70,17 @@ struct LoginView: View {
             }
         }
     }
-    
-    
+}
+
+// Mark: - AuthenticationFormProtocol
+
+extension LoginView: AuthenticationFormProtocol{
+    var formIsValid: Bool{
+        return !email.isEmpty
+        && email.contains("@")
+        && !password.isEmpty
+        && password.count > 5
+    }
 }
 
 struct LoginView_Previews: PreviewProvider {

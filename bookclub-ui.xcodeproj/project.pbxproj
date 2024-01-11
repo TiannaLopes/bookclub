@@ -18,7 +18,6 @@
 		5F32D8FD2B4EF34600017D91 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D8FC2B4EF34600017D91 /* SignUpView.swift */; };
 		5F32D8FF2B4EF35E00017D91 /* BookClubDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D8FE2B4EF35E00017D91 /* BookClubDetailView.swift */; };
 		5F32D9012B4EF37000017D91 /* MyBookClubsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D9002B4EF37000017D91 /* MyBookClubsView.swift */; };
-		5F32D9032B4F225000017D91 /* MyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D9022B4F225000017D91 /* MyAccountView.swift */; };
 		5F32D9072B4F24BA00017D91 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D9062B4F24BA00017D91 /* User.swift */; };
 		5F32D9092B4F254500017D91 /* BookClubEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D9082B4F254500017D91 /* BookClubEvent.swift */; };
 		5F32D90B2B4F255B00017D91 /* BookClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D90A2B4F255B00017D91 /* BookClub.swift */; };
@@ -26,6 +25,14 @@
 		5F7747422B4F2BCB00391CC6 /* BookClubRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747412B4F2BCB00391CC6 /* BookClubRowView.swift */; };
 		5F7747462B4F6EAD00391CC6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747452B4F6EAD00391CC6 /* MainView.swift */; };
 		5F77474F2B505B2100391CC6 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77474E2B505B2100391CC6 /* InputView.swift */; };
+		5F7747512B5063B200391CC6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747502B5063B200391CC6 /* ProfileView.swift */; };
+		5F7747532B50660000391CC6 /* SettingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747522B50660000391CC6 /* SettingRowView.swift */; };
+		5F7747552B506DCF00391CC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F7747542B506DCF00391CC6 /* GoogleService-Info.plist */; };
+		5F7747582B506E8900391CC6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5F7747572B506E8900391CC6 /* FirebaseAuth */; };
+		5F77475A2B506E8900391CC6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5F7747592B506E8900391CC6 /* FirebaseFirestore */; };
+		5F77475C2B506E8900391CC6 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5F77475B2B506E8900391CC6 /* FirebaseFirestoreSwift */; };
+		5F77475E2B506E8900391CC6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5F77475D2B506E8900391CC6 /* FirebaseStorage */; };
+		5F7747622B506F1400391CC6 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747612B506F1400391CC6 /* AuthViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +67,6 @@
 		5F32D8FC2B4EF34600017D91 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5F32D8FE2B4EF35E00017D91 /* BookClubDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClubDetailView.swift; sourceTree = "<group>"; };
 		5F32D9002B4EF37000017D91 /* MyBookClubsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookClubsView.swift; sourceTree = "<group>"; };
-		5F32D9022B4F225000017D91 /* MyAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountView.swift; sourceTree = "<group>"; };
 		5F32D9062B4F24BA00017D91 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5F32D9082B4F254500017D91 /* BookClubEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClubEvent.swift; sourceTree = "<group>"; };
 		5F32D90A2B4F255B00017D91 /* BookClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClub.swift; sourceTree = "<group>"; };
@@ -68,6 +74,10 @@
 		5F7747412B4F2BCB00391CC6 /* BookClubRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClubRowView.swift; sourceTree = "<group>"; };
 		5F7747452B4F6EAD00391CC6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5F77474E2B505B2100391CC6 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		5F7747502B5063B200391CC6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		5F7747522B50660000391CC6 /* SettingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRowView.swift; sourceTree = "<group>"; };
+		5F7747542B506DCF00391CC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5F7747612B506F1400391CC6 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +85,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F7747582B506E8900391CC6 /* FirebaseAuth in Frameworks */,
+				5F77475E2B506E8900391CC6 /* FirebaseStorage in Frameworks */,
+				5F77475A2B506E8900391CC6 /* FirebaseFirestore in Frameworks */,
+				5F77475C2B506E8900391CC6 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,10 +135,9 @@
 				5F7747492B5057CE00391CC6 /* Core */,
 				5F7747482B5057C800391CC6 /* Components */,
 				5F7747472B5057C100391CC6 /* App */,
-				5F32D8F12B4EF28E00017D91 /* Views */,
 				5F32D8F02B4EF28600017D91 /* Models */,
-				5F32D8BB2B4D8CF700017D91 /* bookclub_uiApp.swift */,
 				5F32D8BF2B4D8CF900017D91 /* Assets.xcassets */,
+				5F7747542B506DCF00391CC6 /* GoogleService-Info.plist */,
 				5F32D8C12B4D8CF900017D91 /* Preview Content */,
 				5F32D90C2B4F261B00017D91 /* ColorExtensions.swift */,
 			);
@@ -166,16 +179,10 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		5F32D8F12B4EF28E00017D91 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		5F7747472B5057C100391CC6 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				5F32D8BB2B4D8CF700017D91 /* bookclub_uiApp.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -184,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				5F77474E2B505B2100391CC6 /* InputView.swift */,
+				5F7747522B50660000391CC6 /* SettingRowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -197,7 +205,6 @@
 				5F32D8FA2B4EF32300017D91 /* BookClubFeedView.swift */,
 				5F32D8FE2B4EF35E00017D91 /* BookClubDetailView.swift */,
 				5F32D9002B4EF37000017D91 /* MyBookClubsView.swift */,
-				5F32D9022B4F225000017D91 /* MyAccountView.swift */,
 				5F7747412B4F2BCB00391CC6 /* BookClubRowView.swift */,
 			);
 			path = Core;
@@ -214,8 +221,8 @@
 		5F77474C2B50583D00391CC6 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				5F32D8FC2B4EF34600017D91 /* SignUpView.swift */,
-				5F32D8F42B4EF2D000017D91 /* LoginView.swift */,
+				5F7747602B506EEA00391CC6 /* ViewModel */,
+				5F77475F2B506EE400391CC6 /* View */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -223,8 +230,26 @@
 		5F77474D2B50584300391CC6 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				5F7747502B5063B200391CC6 /* ProfileView.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		5F77475F2B506EE400391CC6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5F32D8FC2B4EF34600017D91 /* SignUpView.swift */,
+				5F32D8F42B4EF2D000017D91 /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5F7747602B506EEA00391CC6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5F7747612B506F1400391CC6 /* AuthViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +268,12 @@
 			dependencies = (
 			);
 			name = "bookclub-ui";
+			packageProductDependencies = (
+				5F7747572B506E8900391CC6 /* FirebaseAuth */,
+				5F7747592B506E8900391CC6 /* FirebaseFirestore */,
+				5F77475B2B506E8900391CC6 /* FirebaseFirestoreSwift */,
+				5F77475D2B506E8900391CC6 /* FirebaseStorage */,
+			);
 			productName = "bookclub-ui";
 			productReference = 5F32D8B82B4D8CF700017D91 /* bookclub-ui.app */;
 			productType = "com.apple.product-type.application";
@@ -315,6 +346,9 @@
 				Base,
 			);
 			mainGroup = 5F32D8AF2B4D8CF700017D91;
+			packageReferences = (
+				5F7747562B506E8800391CC6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 5F32D8B92B4D8CF700017D91 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -333,6 +367,7 @@
 			files = (
 				5F32D8C32B4D8CF900017D91 /* Preview Assets.xcassets in Resources */,
 				5F32D8C02B4D8CF900017D91 /* Assets.xcassets in Resources */,
+				5F7747552B506DCF00391CC6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,13 +399,15 @@
 				5F32D8FD2B4EF34600017D91 /* SignUpView.swift in Sources */,
 				5F32D8FF2B4EF35E00017D91 /* BookClubDetailView.swift in Sources */,
 				5F32D8F52B4EF2D000017D91 /* LoginView.swift in Sources */,
-				5F32D9032B4F225000017D91 /* MyAccountView.swift in Sources */,
+				5F7747512B5063B200391CC6 /* ProfileView.swift in Sources */,
 				5F32D90B2B4F255B00017D91 /* BookClub.swift in Sources */,
 				5F32D9072B4F24BA00017D91 /* User.swift in Sources */,
 				5F32D8BC2B4D8CF700017D91 /* bookclub_uiApp.swift in Sources */,
 				5F32D9012B4EF37000017D91 /* MyBookClubsView.swift in Sources */,
+				5F7747622B506F1400391CC6 /* AuthViewModel.swift in Sources */,
 				5F32D8FB2B4EF32300017D91 /* BookClubFeedView.swift in Sources */,
 				5F32D9092B4F254500017D91 /* BookClubEvent.swift in Sources */,
+				5F7747532B50660000391CC6 /* SettingRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,6 +732,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5F7747562B506E8800391CC6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5F7747572B506E8900391CC6 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F7747562B506E8800391CC6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		5F7747592B506E8900391CC6 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F7747562B506E8800391CC6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		5F77475B2B506E8900391CC6 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F7747562B506E8800391CC6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		5F77475D2B506E8900391CC6 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F7747562B506E8800391CC6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5F32D8B02B4D8CF700017D91 /* Project object */;
 }

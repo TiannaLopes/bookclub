@@ -5,15 +5,21 @@
 //  Created by Tianna Alina Lopes on 1/10/24.
 //
 
-struct User: Identifiable {
-    let id: Int
-    var username: String
+import Foundation
+
+struct User: Identifiable, Codable {
+    let id: String
+    var firstName: String
+    var lastName: String
     var email: String
-    var favoriteBook: String
-    var bio: String
     
-    // Mock data for the current user
-    static var currentUser: User {
-        User(id: 1, username: "JaneDoe", email: "jane.doe@example.com", favoriteBook: "Pride and Prejudice", bio: "Avid reader and coffee enthusiast")
+        var initials: String {
+            let firstInitial = firstName.first.map { String($0) } ?? ""
+            let lastInitial = lastName.first.map { String($0) } ?? ""
+            return firstInitial + lastInitial
     }
+}
+
+extension User {
+    static var MOCK_USER = User(id: NSUUID().uuidString, firstName:"Patrick", lastName:"Kane", email: "name@gmail.com")
 }

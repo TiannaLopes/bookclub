@@ -14,6 +14,8 @@ struct SignUpView: View {
     @State private var confirmPassword: String = ""
     
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var viewModel: AuthViewModel
+
 
     let darkMaroon = Color(hex: "3D0814")
     let paleYellow = Color(hex: "E7F9A9")
@@ -43,14 +45,28 @@ struct SignUpView: View {
                 InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
                 
                 InputView(text: $confirmPassword, title: "Confirm Password", placeholder: "Confirm your password", isSecureField: true)
+                if !password.isEmpty && !confirmPassword.isEmpty {
+                    if password == confirmPassword{
+                        Image(systemName: "checkmark.circle.fill")
+                            .imageScale(.large)
+                            .fontWeight(.bold)
+                            .foregroundColor(oliveGreen)
+                    }else{
+                        Image(systemName: "xmark.circle.fill")
+                            .imageScale(.large)
+                            .fontWeight(.bold)
+                            .foregroundColor(darkMaroon)
+                    }
+                }
             }
             .padding(.horizontal)
             .padding(.top, 12)
             
             // sign up button
             Button{
-                print("Sign user up...")
-            } label:{
+                Task{
+                    try await  viewModel.createUser(withEmail: email, password: password, firstName: firstName, lastName: lastName)
+                }            } label:{
                 HStack{
                     Text("SIGN UP")
                         .fontWeight(.semibold)
@@ -59,7 +75,9 @@ struct SignUpView: View {
                 .foregroundColor(.white)
                 .frame(width: UIScreen.main.bounds.width - 32, height: 48)
             }
-            .background(Color(.systemBlue))
+            .background(tan)
+            .disabled(!formIsValid)
+            .opacity(formIsValid ? 1.0 : 0.5)
             .cornerRadius(10)
             .padding(.top, 24)
             
@@ -80,7 +98,19 @@ struct SignUpView: View {
     }
         
 }
+// Mark: - AuthenticationFormProtocol
 
+extension SignUpView: AuthenticationFormProtocol{
+    var formIsValid: Bool{
+        return !email.isEmpty
+        && email.contains("@")
+        && !password.isEmpty
+        && password.count > 5
+        && confirmPassword == password
+        && !firstName.isEmpty
+        && !lastName.isEmpty
+    }
+}
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
