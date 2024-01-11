@@ -15,7 +15,7 @@
 		5F32D8D92B4D8CFA00017D91 /* bookclub_uiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D8D82B4D8CFA00017D91 /* bookclub_uiUITestsLaunchTests.swift */; };
 		5F32D8F52B4EF2D000017D91 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D8F42B4EF2D000017D91 /* LoginView.swift */; };
 		5F32D8FB2B4EF32300017D91 /* BookClubFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D8FA2B4EF32300017D91 /* BookClubFeedView.swift */; };
-		5F32D8FD2B4EF34600017D91 /* CreateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D8FC2B4EF34600017D91 /* CreateProfileView.swift */; };
+		5F32D8FD2B4EF34600017D91 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D8FC2B4EF34600017D91 /* SignUpView.swift */; };
 		5F32D8FF2B4EF35E00017D91 /* BookClubDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D8FE2B4EF35E00017D91 /* BookClubDetailView.swift */; };
 		5F32D9012B4EF37000017D91 /* MyBookClubsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D9002B4EF37000017D91 /* MyBookClubsView.swift */; };
 		5F32D9032B4F225000017D91 /* MyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D9022B4F225000017D91 /* MyAccountView.swift */; };
@@ -25,6 +25,7 @@
 		5F32D90D2B4F261B00017D91 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D90C2B4F261B00017D91 /* ColorExtensions.swift */; };
 		5F7747422B4F2BCB00391CC6 /* BookClubRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747412B4F2BCB00391CC6 /* BookClubRowView.swift */; };
 		5F7747462B4F6EAD00391CC6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747452B4F6EAD00391CC6 /* MainView.swift */; };
+		5F77474F2B505B2100391CC6 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77474E2B505B2100391CC6 /* InputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +57,7 @@
 		5F32D8D82B4D8CFA00017D91 /* bookclub_uiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookclub_uiUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5F32D8F42B4EF2D000017D91 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5F32D8FA2B4EF32300017D91 /* BookClubFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClubFeedView.swift; sourceTree = "<group>"; };
-		5F32D8FC2B4EF34600017D91 /* CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileView.swift; sourceTree = "<group>"; };
+		5F32D8FC2B4EF34600017D91 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5F32D8FE2B4EF35E00017D91 /* BookClubDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClubDetailView.swift; sourceTree = "<group>"; };
 		5F32D9002B4EF37000017D91 /* MyBookClubsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookClubsView.swift; sourceTree = "<group>"; };
 		5F32D9022B4F225000017D91 /* MyAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountView.swift; sourceTree = "<group>"; };
@@ -66,6 +67,7 @@
 		5F32D90C2B4F261B00017D91 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		5F7747412B4F2BCB00391CC6 /* BookClubRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClubRowView.swift; sourceTree = "<group>"; };
 		5F7747452B4F6EAD00391CC6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		5F77474E2B505B2100391CC6 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,9 @@
 		5F32D8BA2B4D8CF700017D91 /* bookclub-ui */ = {
 			isa = PBXGroup;
 			children = (
+				5F7747492B5057CE00391CC6 /* Core */,
+				5F7747482B5057C800391CC6 /* Components */,
+				5F7747472B5057C100391CC6 /* App */,
 				5F32D8F12B4EF28E00017D91 /* Views */,
 				5F32D8F02B4EF28600017D91 /* Models */,
 				5F32D8BB2B4D8CF700017D91 /* bookclub_uiApp.swift */,
@@ -164,16 +169,62 @@
 		5F32D8F12B4EF28E00017D91 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5F32D8F42B4EF2D000017D91 /* LoginView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5F7747472B5057C100391CC6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5F7747482B5057C800391CC6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				5F77474E2B505B2100391CC6 /* InputView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		5F7747492B5057CE00391CC6 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				5F77474D2B50584300391CC6 /* Profile */,
+				5F77474C2B50583D00391CC6 /* Authentication */,
+				5F77474A2B50580000391CC6 /* Root */,
 				5F32D8FA2B4EF32300017D91 /* BookClubFeedView.swift */,
-				5F32D8FC2B4EF34600017D91 /* CreateProfileView.swift */,
 				5F32D8FE2B4EF35E00017D91 /* BookClubDetailView.swift */,
 				5F32D9002B4EF37000017D91 /* MyBookClubsView.swift */,
 				5F32D9022B4F225000017D91 /* MyAccountView.swift */,
 				5F7747412B4F2BCB00391CC6 /* BookClubRowView.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		5F77474A2B50580000391CC6 /* Root */ = {
+			isa = PBXGroup;
+			children = (
 				5F7747452B4F6EAD00391CC6 /* MainView.swift */,
 			);
-			path = Views;
+			path = Root;
+			sourceTree = "<group>";
+		};
+		5F77474C2B50583D00391CC6 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				5F32D8FC2B4EF34600017D91 /* SignUpView.swift */,
+				5F32D8F42B4EF2D000017D91 /* LoginView.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		5F77474D2B50584300391CC6 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,9 +358,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F7747422B4F2BCB00391CC6 /* BookClubRowView.swift in Sources */,
+				5F77474F2B505B2100391CC6 /* InputView.swift in Sources */,
 				5F7747462B4F6EAD00391CC6 /* MainView.swift in Sources */,
 				5F32D90D2B4F261B00017D91 /* ColorExtensions.swift in Sources */,
-				5F32D8FD2B4EF34600017D91 /* CreateProfileView.swift in Sources */,
+				5F32D8FD2B4EF34600017D91 /* SignUpView.swift in Sources */,
 				5F32D8FF2B4EF35E00017D91 /* BookClubDetailView.swift in Sources */,
 				5F32D8F52B4EF2D000017D91 /* LoginView.swift in Sources */,
 				5F32D9032B4F225000017D91 /* MyAccountView.swift in Sources */,
