@@ -24,6 +24,7 @@
 		5F32D90B2B4F255B00017D91 /* BookClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D90A2B4F255B00017D91 /* BookClub.swift */; };
 		5F32D90D2B4F261B00017D91 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D90C2B4F261B00017D91 /* ColorExtensions.swift */; };
 		5F7747422B4F2BCB00391CC6 /* BookClubRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747412B4F2BCB00391CC6 /* BookClubRowView.swift */; };
+		5F7747462B4F6EAD00391CC6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747452B4F6EAD00391CC6 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		5F32D90A2B4F255B00017D91 /* BookClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClub.swift; sourceTree = "<group>"; };
 		5F32D90C2B4F261B00017D91 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		5F7747412B4F2BCB00391CC6 /* BookClubRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClubRowView.swift; sourceTree = "<group>"; };
+		5F7747452B4F6EAD00391CC6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				5F32D9002B4EF37000017D91 /* MyBookClubsView.swift */,
 				5F32D9022B4F225000017D91 /* MyAccountView.swift */,
 				5F7747412B4F2BCB00391CC6 /* BookClubRowView.swift */,
+				5F7747452B4F6EAD00391CC6 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F7747422B4F2BCB00391CC6 /* BookClubRowView.swift in Sources */,
+				5F7747462B4F6EAD00391CC6 /* MainView.swift in Sources */,
 				5F32D90D2B4F261B00017D91 /* ColorExtensions.swift in Sources */,
 				5F32D8FD2B4EF34600017D91 /* CreateProfileView.swift in Sources */,
 				5F32D8FF2B4EF35E00017D91 /* BookClubDetailView.swift in Sources */,

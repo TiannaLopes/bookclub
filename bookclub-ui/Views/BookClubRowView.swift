@@ -3,11 +3,12 @@ import SwiftUI
 struct BookClubRowView: View {
     var club: BookClub
     // Define your color palette
-    let background = Color(hex: "C9D3BE")
-    let textColor = Color(hex: "3D0814")
-    let buttonColor = Color(hex: "442F38")
-    // Off-white color for the text fields
+    let darkMaroon = Color(hex: "3D0814")
+    let paleYellow = Color(hex: "E7F9A9")
+    let oliveGreen = Color(hex: "C9D3BE")
+    let tan = Color(hex: "CDBB9E")
     let offWhite = Color(hex: "FDFDFD")
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(club.name)

@@ -2,58 +2,35 @@
 import SwiftUI
 
 struct BookClubFeedView: View {
-    @State private var bookClubs: [BookClub] = BookClub.mockData
-    @State private var isFetchingMore = false
-    
-    // Define your color palette
-    let background = Color(hex: "C9D3BE")
-    let textColor = Color(hex: "3D0814")
-    let buttonColor = Color(hex: "442F38")
-    // Off-white color for the text fields
-    let offWhite = Color(hex: "FDFDFD")
-    
-    var body: some View {
-        NavigationView {
+    private let bookClubs =       [
+        BookClub(id: 1, name: "Morning Readers", description: "Join us for a lively morning discussion.", nextMeetingDate: Date().addingTimeInterval(86400 * 7)), // 7 days from now
+        BookClub(id: 2, name: "Sci-Fi Enthusiasts", description: "Exploring the universe, one book at a time.", nextMeetingDate: Date().addingTimeInterval(86400 * 14)), // 14 days from now
+        // More mock data...
+    ]
+
+        let darkMaroon = Color(hex: "3D0814")
+        let paleYellow = Color(hex: "E7F9A9")
+        let oliveGreen = Color(hex: "C9D3BE")
+        let tan = Color(hex: "CDBB9E")
+        let offWhite = Color(hex: "FDFDFD")
+
+        var body: some View {
             ZStack {
-                background.edgesIgnoringSafeArea(.all)
-                
-                ScrollView {
-                    LazyVStack(spacing: 20) {
-                        ForEach(bookClubs) { club in
-                            BookClubRowView(club: club)
-                                .onAppear {
-                                    if bookClubs.last?.id == club.id {
-                                        loadMoreContent()
-                                    }
-                                }
-                        }
-                        if isFetchingMore {
-                            ProgressView()
-                                .scaleEffect(1.5, anchor: .center)
-                                .progressViewStyle(CircularProgressViewStyle(tint: buttonColor))
+          oliveGreen.edgesIgnoringSafeArea(.all)
+                List {
+                    ForEach(bookClubs) { bookClub in
+                        NavigationLink(destination: BookClubDetailView(bookClub: bookClub)) {
+                            BookClubRowView(club: bookClub)
+                                .padding()
+                                .background(offWhite)
+                                .cornerRadius(5.0)
                         }
                     }
-                    .padding()
                 }
+                .padding()
+                .background(tan.opacity(0.8)) // Semi-transparent tan background for the list
+                .cornerRadius(10)
             }
-            .navigationBarTitle("Book Club Feed", displayMode: .large)
-            .navigationBarItems(trailing: Button(action: {
-                // Action for navigation bar button
-            }) {
-                Image(systemName: "plus")
-                    .foregroundColor(textColor)
-            })
+            .navigationBarTitle("Book Club Feed", displayMode: .inline)
         }
     }
-    
-    func loadMoreContent() {
-        // Your pagination logic would go here
-    }
-}
-
-// Preview provider
-struct BookClubFeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        BookClubFeedView()
-    }
-}

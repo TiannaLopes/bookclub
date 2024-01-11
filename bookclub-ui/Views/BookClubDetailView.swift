@@ -37,8 +37,7 @@ struct BookClubDetailView: View {
                         .foregroundColor(darkMaroon)
                 }
 
-                // Other detail components here
-                // ...
+               
 
                 Spacer()
             }
