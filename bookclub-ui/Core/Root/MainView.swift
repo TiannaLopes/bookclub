@@ -6,24 +6,36 @@ struct MainView: View {
     var body: some View {
         Group{
             if viewModel.userSession != nil {
-                ProfileView()
                 NavigationView {
                     TabView {
-                        BookClubFeedView()
-                            .tabItem {
-                                Label("Feed", systemImage: "book.fill")
-                            }
+                        NavigationView {
+                            BookClubFeedView()
+                        }
+                        .tabItem {
+                            Label("Feed", systemImage: "book.fill")
+                        }
                         
-                        MyBookClubsView()
-                            .tabItem {
-                                Label("My BookClubs", systemImage: "person.fill")
-                            }
+                        NavigationView {
+                            MyBookClubsView()
+                        }
+                        .tabItem {
+                            Label("My BookClubs", systemImage: "person.fill")
+                        }
+                        
+                        NavigationView {
+                            ProfileView()
+                        }
+                        .tabItem {
+                            Label("Profile", systemImage: "person.crop.circle")
+                        }
                     }
                     .navigationTitle("Book Club")
                     .navigationBarTitleDisplayMode(.inline)
                 }
-            }else{
-                LoginView()
+            }
+                else {
+                    LoginView()
+                
             }
         }
     }
