@@ -1,11 +1,10 @@
-
 import SwiftUI
 
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @EnvironmentObject var viewModel: AuthViewModel
-    
+
     // Define the colors from your palette
     let darkMaroon = Color(hex: "3D0814")
     let paleYellow = Color(hex: "E7F9A9")
@@ -14,72 +13,78 @@ struct LoginView: View {
     let deepPurple = Color(hex: "442F38")
     let offWhite = Color(hex: "FDFDFD")
 
-  
     var body: some View {
-        NavigationStack{
-            VStack{
-                // image
+        ZStack {
+            oliveGreen.edgesIgnoringSafeArea(.all)
+
+            VStack(spacing: 20) {
                 Image("bookclub-logo")
                     .resizable()
                     .scaledToFill()
-                    .frame(width:100, height: 100)
+                    .frame(width:200, height: 200)
+                    .cornerRadius(20)
                     .padding(.vertical, 32)
-                
-                // form fields
-                VStack(spacing: 24){
-                    InputView(text: $email, title: "Email Address", placeholder: "name@example.com")
+
+                VStack(spacing: 24) {
+                    TextField("Email Address", text: $email)
+                        .padding()
+                        .background(offWhite)
+                        .cornerRadius(10)
                         .autocapitalization(.none)
-                    
-                    InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
+
+                    SecureField("Password", text: $password)
+                        .padding()
+                        .background(offWhite)
+                        .cornerRadius(10)
                 }
                 .padding(.horizontal)
                 .padding(.top, 12)
-                
-                // sign in button
-                Button{
-                    Task{
-                      try await  viewModel.signIn(withEmail: email, password: password)
+
+                Button(action: {
+                    Task {
+                        try await viewModel.signIn(withEmail: email, password: password)
                     }
-                } label:{
-                    HStack{
-                        Text("SIGN IN")
-                            .fontWeight(.semibold)
-                        Image(systemName: "arrow.right")
-                    }
-                    .foregroundColor(.white)
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 48)
+                }) {
+                    Text("SIGN IN")
+                        .font(.headline)
+                        .foregroundColor(paleYellow)
+                        .padding()
+                        .frame(width: 220, height: 60)
+                        .background(darkMaroon)
+                        .cornerRadius(15.0)
                 }
-                .background(tan)
                 .disabled(!formIsValid)
                 .opacity(formIsValid ? 1.0 : 0.5)
-                .cornerRadius(10)
                 .padding(.top, 24)
-                
+
                 Spacer()
-                // sign up button
-                NavigationLink{
+
+                NavigationLink {
                     SignUpView()
-                        .navigationBarBackButtonHidden(true) 
-                }label:{
-                    HStack(spacing: 3){
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    HStack(spacing: 3) {
                         Text("Don't have an account?")
+                            .foregroundStyle(deepPurple)
                         Text("Sign up")
                             .fontWeight(.bold)
-                    }.font(.system(size: 14))
+                            .foregroundStyle(deepPurple)
+                    }
+                    .font(.system(size: 14))
                 }
             }
+            .padding()
+            .background(tan.opacity(0.8))
+            .cornerRadius(10)
         }
     }
 }
 
 // Mark: - AuthenticationFormProtocol
 
-extension LoginView: AuthenticationFormProtocol{
-    var formIsValid: Bool{
-        return !email.isEmpty
-        && email.contains("@")
-        && !password.isEmpty
-        && password.count > 5
+extension LoginView: AuthenticationFormProtocol {
+    var formIsValid: Bool {
+        !email.isEmpty && email.contains("@") && !password.isEmpty && password.count > 5
     }
 }
 
@@ -88,46 +93,4 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
-
-
-//  var body: some View {
-//ZStack {
-//    // Use oliveGreen as the primary background color
-//    oliveGreen.edgesIgnoringSafeArea(.all)
-//
-//    // Login form
-//    VStack(spacing: 20) {
-//        Text("Sign in")
-//            .font(.largeTitle)
-//            .foregroundColor(darkMaroon)
-//
-//        TextField("Username", text: $username)
-//            .padding()
-//            .background(offWhite)
-//            .cornerRadius(5.0)
-//
-//        SecureField("Password", text: $password)
-//            .padding()
-//            .background(offWhite)
-//            .cornerRadius(5.0)
-//
-//        Button(action: {
-//            // Handle login action
-//        }) {
-//            Text("Login")
-//                .font(.headline)
-//                .foregroundColor(paleYellow)
-//                .padding()
-//                .frame(width: 220, height: 60)
-//                .background(darkMaroon)
-//                .cornerRadius(15.0)
-//        }
-//    }
-//    .padding()
-//    .background(tan.opacity(0.8)) // Semi-transparent tan background for the form
-//    .cornerRadius(10)
-//}
-//}
-
-
 

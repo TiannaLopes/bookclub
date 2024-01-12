@@ -26,13 +26,14 @@ struct InputView: View{
              .foregroundColor(darkMaroon)
                 .fontWeight(.semibold)
                 .font(.footnote)
-            
+                .foregroundColor(tan.opacity(0.8))
             if isSecureField{
                 SecureField(placeholder, text: $text)
                     .font(.system(size: 14))
             }else{
                 TextField(placeholder, text: $text)
                     .font(.system(size: 14))
+                    .foregroundColor(darkMaroon.opacity(0.8))
             }
             Divider()
         }
