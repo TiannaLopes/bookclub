@@ -19,15 +19,26 @@ class BookClubViewModel: ObservableObject{
     @Published var currentUser: User?
     
     init(){
-        //        self.userSession = Auth.auth().currentUser
-        //
-        //        Task {
-        //            await fetchUser()
-        //        }
+//                Task {
+//                    await fetchBookClub()
+//                }
     }
     
-    func createBookClub( name:String, bookName: String, Location: String, Date: Date, owner: String)async throws{
-        print("creating book club")
+        func createBookClub(name: String, description: String, nextMeetingDate: Date, owner: String) async throws {
+            let newBookClub = BookClub(id: UUID().uuidString,
+                                       name: name,
+                                       description: description,
+                                       owner: owner,
+                                       nextMeetingDate: nextMeetingDate)
+
+  do {
+            let encodedBookClub = try Firestore.Encoder().encode(newBookClub)
+            try await Firestore.firestore().collection("bookclubs").document(newBookClub.id).setData(encodedBookClub)
+            print("Book club created successfully")
+        } catch {
+            print("Failed to create book club with error: \(error.localizedDescription)")
+            throw error
+        }
     }
     
     func deleteBookClub(){
@@ -46,7 +57,7 @@ class BookClubViewModel: ObservableObject{
         print("leave book club")
     }
     
-    func getBookClubDetails(bookclubId: String){
+    func fetchBookClub(){
         print("get book club details")
     }
 }
