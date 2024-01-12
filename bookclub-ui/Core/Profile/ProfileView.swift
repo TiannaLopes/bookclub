@@ -11,57 +11,74 @@ struct ProfileView: View {
     let offWhite = Color(hex: "FDFDFD")
 
     var body: some View {
-        if let user = viewModel.currentUser {
-            List{
-                Section{
-                    HStack{
-                        Text(user.initials)
-                            .font(.title)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                            .frame(width:72, height: 72)
-                            .background(tan)
-                            .clipShape(Circle())
-                        VStack(alignment: .leading, spacing:4){
-                            Text(user.firstName + user.lastName)
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .padding(.top, 4)
-                            Text(user.email)
-                                .font(.footnote)
-                                .foregroundColor(offWhite)
-                        }
-                    }
-                }
-                Section("General"){
-                    HStack{
-                        SettingRowView(imageName:"gear", title:"Version", tintColor:offWhite)
-                        Spacer()
-                        
-                        Text("1.0.0")
+        ZStack {
+            oliveGreen.edgesIgnoringSafeArea(.all)
+
+            if let user = viewModel.currentUser {
+                VStack(spacing: 20) {
+                    Text("My Account")
+                        .font(.largeTitle)
+                        .foregroundColor(darkMaroon)
+                        .frame(maxWidth: .infinity, maxHeight:200)
+                        .background(tan.opacity(0.8))
+                        .padding(.top)
+                        .padding(.bottom)
+                    Text(user.initials)
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .frame(width:72, height: 72)
+                        .background(tan)
+                        .clipShape(Circle())
+                    VStack(alignment: .leading, spacing:4){
+                        Text(user.firstName + " " + user.lastName)
                             .font(.subheadline)
+                            .fontWeight(.semibold)
+                        Text(user.email)
+                            .font(.footnote)
                             .foregroundColor(offWhite)
                     }
+                Spacer()  // Pushes the content to the left
+                 
+
+                        // Additional sections can be added here as needed
+
+                        Button {
+                            viewModel.signOut()
+                        } label: {
+                            Text("Sign Out")
+                                .font(.headline)
+                                .foregroundColor(paleYellow)
+                                .padding()
+                                .frame(width: 220, height: 60)
+                                .background(darkMaroon)
+                                .cornerRadius(15.0)
+                        }
+                        .padding(.bottom, 10)
+
+                        Button {
+                            viewModel.deleteAccount()
+                        } label: {
+                            Text("Delete Account")
+                                .font(.headline)
+                                .foregroundColor(paleYellow)
+                                .padding()
+                                .frame(width: 220, height: 60)
+                                .background(darkMaroon)
+                                .cornerRadius(15.0)
+                        }
+
+                        Spacer()
+                  
                 }
-                Section("Account"){
-                    Button{
-                        viewModel.signOut()
-                    }label:{
-                        SettingRowView(imageName: "arrow.left.circle.fill", title: "Sign out", tintColor: Color(.red))
-                    }
-                    
-                    Button{
-                        viewModel.deleteAccount()
-                    }label: {
-                        SettingRowView(imageName: "xmark.circle.fill", title:"Delete account", tintColor: Color(.red))
-                    }
-                }
+            } else {
+                // Handle case where user is not logged in or user data is unavailable
+                Text("User not found")
+                    .foregroundColor(darkMaroon)
             }
         }
-            
-        }
-    
-
+        .navigationBarTitle("My Account", displayMode: .inline)
+    }
 }
 
 struct ProfileView_Previews: PreviewProvider {
@@ -70,61 +87,3 @@ struct ProfileView_Previews: PreviewProvider {
     }
 }
 
-//    ZStack {
-//        // Background color
-//        oliveGreen.edgesIgnoringSafeArea(.all)
-//
-//        // Form
-//        VStack(spacing: 20) {
-//            Text("My Account")
-//                .font(.largeTitle)
-//                .foregroundColor(darkMaroon)
-//                .padding(.top)
-//
-//            if editingProfile {
-//                Group {
-//                    TextField("Username", text: $currentUser.username)
-//                    TextField("Email", text: $currentUser.email)
-//                    TextField("Favorite Book", text: $currentUser.favoriteBook)
-//                    TextField("Bio", text: $currentUser.bio)
-//                }
-//                .padding()
-//                .background(offWhite)
-//                .cornerRadius(5.0)
-//            } else {
-//                Group {
-//                    Text(currentUser.username)
-//                    Text(currentUser.email)
-//                    Text(currentUser.favoriteBook)
-//                    Text(currentUser.bio)
-//                }
-//                .padding()
-//                .frame(maxWidth: .infinity, alignment: .leading)
-//                .background(offWhite)
-//                .cornerRadius(5.0)
-//            }
-//
-//            Button(action: {
-//                if editingProfile {
-//                    // Save the changes to user profile
-//                    // Call a function to update the profile data
-//                }
-//                editingProfile.toggle()
-//            }) {
-//                Text(editingProfile ? "Save Changes" : "Edit Profile")
-//                    .font(.headline)
-//                    .foregroundColor(paleYellow)
-//                    .padding()
-//                    .frame(width: 220, height: 60)
-//                    .background(darkMaroon)
-//                    .cornerRadius(15.0)
-//            }
-//            Spacer()
-//        }
-//        .padding()
-//        .background(tan.opacity(0.8)) // Semi-transparent tan background for the form
-//        .cornerRadius(10)
-//    }
-//    .navigationBarTitle("My Account", displayMode: .inline)
-//}
-//

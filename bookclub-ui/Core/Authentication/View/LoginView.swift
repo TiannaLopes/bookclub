@@ -14,68 +14,56 @@ struct LoginView: View {
     let offWhite = Color(hex: "FDFDFD")
 
     var body: some View {
-        ZStack {
-            oliveGreen.edgesIgnoringSafeArea(.all)
-
-            VStack(spacing: 20) {
-                Image("bookclub-logo")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width:200, height: 200)
-                    .cornerRadius(20)
-                    .padding(.vertical, 32)
-
-                VStack(spacing: 24) {
-                    TextField("Email Address", text: $email)
-                        .padding()
-                        .background(offWhite)
-                        .cornerRadius(10)
+        NavigationStack{
+            ZStack {
+                oliveGreen.edgesIgnoringSafeArea(.all)
+                VStack(spacing: 20) {
+                    Text("Sign In")
+                        .font(.largeTitle)
+                        .foregroundColor(darkMaroon)
+                    
+                    InputView(text: $email, title: "Email Address", placeholder: "name@example.com")
                         .autocapitalization(.none)
-
-                    SecureField("Password", text: $password)
-                        .padding()
-                        .background(offWhite)
-                        .cornerRadius(10)
-                }
-                .padding(.horizontal)
-                .padding(.top, 12)
-
-                Button(action: {
-                    Task {
-                        try await viewModel.signIn(withEmail: email, password: password)
+                    
+                    InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
+                    
+                    Button(action: {
+                        Task {
+                            try await viewModel.signIn(withEmail: email, password: password)
+                        }
+                    }) {
+                        Text("SIGN IN")
+                            .font(.headline)
+                            .foregroundColor(paleYellow)
+                            .padding()
+                            .frame(width: 220, height: 60)
+                            .background(darkMaroon)
+                            .cornerRadius(15.0)
                     }
-                }) {
-                    Text("SIGN IN")
-                        .font(.headline)
-                        .foregroundColor(paleYellow)
-                        .padding()
-                        .frame(width: 220, height: 60)
-                        .background(darkMaroon)
-                        .cornerRadius(15.0)
-                }
-                .disabled(!formIsValid)
-                .opacity(formIsValid ? 1.0 : 0.5)
-                .padding(.top, 24)
-
-                Spacer()
-
-                NavigationLink {
-                    SignUpView()
-                        .navigationBarBackButtonHidden(true)
-                } label: {
-                    HStack(spacing: 3) {
-                        Text("Don't have an account?")
-                            .foregroundStyle(deepPurple)
-                        Text("Sign up")
-                            .fontWeight(.bold)
-                            .foregroundStyle(deepPurple)
+                    .disabled(!formIsValid)
+                    .opacity(formIsValid ? 1.0 : 0.5)
+                    .padding(.top, 24)
+                    
+                    Spacer()
+                    
+                    NavigationLink {
+                        SignUpView()
+                            .navigationBarBackButtonHidden(true)
+                    } label: {
+                        HStack(spacing: 3) {
+                            Text("Don't have an account?")
+                                .foregroundStyle(deepPurple)
+                            Text("Sign up")
+                                .fontWeight(.bold)
+                                .foregroundStyle(deepPurple)
+                        }
+                        .font(.system(size: 14))
                     }
-                    .font(.system(size: 14))
                 }
+                .padding()
+                .background(tan.opacity(0.8))
+                .cornerRadius(10)
             }
-            .padding()
-            .background(tan.opacity(0.8))
-            .cornerRadius(10)
         }
     }
 }
@@ -93,4 +81,3 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
-

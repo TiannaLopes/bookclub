@@ -7,6 +7,21 @@ struct MainView: View {
         Group{
             if viewModel.userSession != nil {
                 ProfileView()
+                NavigationView {
+                    TabView {
+                        BookClubFeedView()
+                            .tabItem {
+                                Label("Feed", systemImage: "book.fill")
+                            }
+                        
+                        MyBookClubsView()
+                            .tabItem {
+                                Label("My BookClubs", systemImage: "person.fill")
+                            }
+                    }
+                    .navigationTitle("Book Club")
+                    .navigationBarTitleDisplayMode(.inline)
+                }
             }else{
                 LoginView()
             }
@@ -14,19 +29,3 @@ struct MainView: View {
     }
 }
 
-
-//        NavigationView {
-//            TabView {
-//                BookClubFeedView()
-//                    .tabItem {
-//                        Label("Feed", systemImage: "book.fill")
-//                    }
-//
-//                MyAccountView()
-//                    .tabItem {
-//                        Label("Account", systemImage: "person.fill")
-//                    }
-//            }
-//            .navigationTitle("Book Club")
-//            .navigationBarTitleDisplayMode(.inline)
-//        }
