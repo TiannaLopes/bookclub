@@ -2,8 +2,10 @@
 import SwiftUI
 
 struct BookClubDetailView: View {
-    let bookClub: BookClub  // Assume BookClub is a model struct with appropriate properties
+    @StateObject private var bookClubViewModel = BookClubViewModel()
 
+
+    let bookClub: BookClub
     // Define the colors from your palette
     let darkMaroon = Color(hex: "3D0814")
     let paleYellow = Color(hex: "E7F9A9")
@@ -14,7 +16,19 @@ struct BookClubDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                Image("bookClubImage")  // Placeholder for the book club image
+                Button(action: {
+                    Task {
+                       try await bookClubViewModel.joinBookClub(bookClubId: bookClub.id)
+                    }
+                }) {
+                    Text("Join")
+                        .font(.headline)
+                        .foregroundColor(darkMaroon)
+                        .padding(8) 
+                        .background(paleYellow)
+                        .cornerRadius(15.0)
+                }
+                Image("bookClubImage")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
 

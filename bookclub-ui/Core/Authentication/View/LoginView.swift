@@ -31,8 +31,9 @@ struct LoginView: View {
                         Task {
                             try await viewModel.signIn(withEmail: email, password: password)
                         }
-                    }) {
-                        Text("SIGN IN")
+                    }
+                    )
+                    {  Text("SIGN IN")
                             .font(.headline)
                             .foregroundColor(paleYellow)
                             .padding()

@@ -32,9 +32,12 @@ struct InputView: View{
                    if isSecureField && !showPassword {
                        SecureField(placeholder, text: $text)
                            .font(.system(size: 14))
+                           .autocapitalization(.none)
+                           .disableAutocorrection(true)
                    } else {
                        TextField(placeholder, text: $text)
                            .font(.system(size: 14))
+                           .disableAutocorrection(true)
                    }
 
                    if isSecureField {

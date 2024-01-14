@@ -16,9 +16,7 @@ struct MyBookClubsView: View {
     
     var body: some View {
         ZStack {
-            // Background color
             oliveGreen.edgesIgnoringSafeArea(.all)
-
             VStack {
                 Text("My BookClubs")
                     .font(.largeTitle)
@@ -39,7 +37,6 @@ struct MyBookClubsView: View {
                 .listStyle(GroupedListStyle())
             }
         }
-        .navigationBarTitle("My BookClubs", displayMode: .inline)
     }
 }
 
