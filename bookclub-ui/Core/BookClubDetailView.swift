@@ -28,6 +28,18 @@ struct BookClubDetailView: View {
                         .background(paleYellow)
                         .cornerRadius(15.0)
                 }
+                Button(action: {
+                    Task {
+                       try await bookClubViewModel.deleteBookClub(bookClubId: bookClub.id)
+                    }
+                }) {
+                   Text("Delete")
+                       .font(.headline)
+                       .foregroundColor(darkMaroon)
+                       .padding(8)
+                       .background(paleYellow)
+                       .cornerRadius(15.0)
+               }
                 NavigationLink(destination: BookClubFormView(bookClub: bookClub)) {
                                  Text("Edit Book Club Details")
                         .font(.headline)
