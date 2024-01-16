@@ -13,6 +13,8 @@ import FirebaseFirestoreSwift
 class BookClubViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
+    @Published var bookClubs: [BookClub] = []
+
 
     // Create a book club
     func createBookClub(name: String, description: String, nextMeetingDate: Date, owner: String) async throws {
@@ -81,12 +83,31 @@ guard let userId = currentUser?.id else { return }
 }
 
     
-    // Fetch details of a specific book club
-    func fetchBookClub(bookClubId: String) async throws -> BookClub? {
-        let document = try await Firestore.firestore().collection("bookclubs").document(bookClubId).getDocument()
-        let bookClub = try document.data(as: BookClub.self)
-        return bookClub
+    // Fetch details of a specific book club using a completion handler
+    func fetchBookClub(bookClubId: String, completion: @escaping (BookClub?) -> Void) {
+        Firestore.firestore().collection("bookclubs").document(bookClubId).getDocument { documentSnapshot, error in
+            if let error = error {
+                print("Error fetching book club: \(error)")
+                completion(nil)
+                return
+            }
+
+            guard let documentSnapshot = documentSnapshot, documentSnapshot.exists else {
+                print("Document does not exist.")
+                completion(nil)
+                return
+            }
+
+            do {
+                let bookClub = try documentSnapshot.data(as: BookClub.self)
+                completion(bookClub)
+            } catch {
+                print("Error decoding book club: \(error)")
+                completion(nil)
+            }
+        }
     }
+    
     // Get list of book clubs the user has joined
     func getListOfBookClubsUserHasJoined() async throws -> [BookClub] {
         guard let userId = currentUser?.id else { return [] }
@@ -100,12 +121,15 @@ guard let userId = currentUser?.id else { return }
         return bookClubs
     }
 
-    // Get list of all book clubs
-    func getListOfAllBookClubs() async throws -> [BookClub] {
-        let querySnapshot = try await Firestore.firestore().collection("bookclubs").getDocuments()
-        let bookClubs = querySnapshot.documents.compactMap { document -> BookClub? in
-            try? document.data(as: BookClub.self)
-        }
-        return bookClubs
-    }
+    // Fetch all book clubs from the database
+      func fetchAllBookClubs() async {
+          do {
+              let querySnapshot = try await Firestore.firestore().collection("bookclubs").getDocuments()
+              self.bookClubs = querySnapshot.documents.compactMap { document -> BookClub? in
+                  try? document.data(as: BookClub.self)
+              }
+          } catch {
+              print("Error fetching book clubs: \(error)")
+          }
+      }
 }

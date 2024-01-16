@@ -28,6 +28,14 @@ struct BookClubDetailView: View {
                         .background(paleYellow)
                         .cornerRadius(15.0)
                 }
+                NavigationLink(destination: BookClubFormView(bookClub: bookClub)) {
+                                 Text("Edit Book Club Details")
+                        .font(.headline)
+                        .foregroundColor(darkMaroon)
+                        .padding(8)
+                        .background(paleYellow)
+                        .cornerRadius(15.0)
+                             }
                 Image("bookClubImage")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -54,7 +62,7 @@ struct BookClubDetailView: View {
                
 
                 Spacer()
-            }
+                     }
             .padding()
         }
         .navigationBarTitle(Text(bookClub.name), displayMode: .inline)
