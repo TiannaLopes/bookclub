@@ -6,6 +6,7 @@ struct BookClub: Identifiable, Codable {
     let description: String
     var owner: String
     let nextMeetingDate: Date
+    var attendees: [String]? 
     
     static var mockData: [BookClub] {
         [

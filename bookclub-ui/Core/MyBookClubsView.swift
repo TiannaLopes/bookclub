@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct MyBookClubsView: View {
+    
+    @StateObject private var bookClubViewModel = BookClubViewModel()
+
     // Define the colors from your palette
     let darkMaroon = Color(hex: "3D0814")
     let paleYellow = Color(hex: "E7F9A9")
@@ -24,9 +27,9 @@ struct MyBookClubsView: View {
                     .padding()
                 
                 oliveGreen.edgesIgnoringSafeArea(.all)
-                      List {
-                          ForEach(myEvents) { bookClub in
-                              NavigationLink(destination: BookClubDetailView(bookClub: bookClub)) {
+                List {
+                          ForEach(bookClubViewModel.bookClubs) { bookClub in
+                              NavigationLink(destination: BookClubDetailView(bookClub: bookClub, bookClubViewModel: bookClubViewModel)) {
                                   BookClubRowView(club: bookClub)
                                       .padding()
                                       .background(offWhite)

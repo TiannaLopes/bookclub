@@ -31,7 +31,7 @@ struct BookClubFeedView: View {
 
                     List {
                         ForEach(bookClubViewModel.bookClubs) { bookClub in
-                            NavigationLink(destination: BookClubDetailView(bookClub: bookClub)) {
+                            NavigationLink(destination: BookClubDetailView(bookClub: bookClub, bookClubViewModel: bookClubViewModel)) {
                                 BookClubRowView(club: bookClub)
                                     .padding()
                                     .background(offWhite)
@@ -45,11 +45,11 @@ struct BookClubFeedView: View {
                 }
             }
             .navigationDestination(for: NavigationDestination.self) { destination in
-                switch destination {
-                    case .bookClubForm:
-                        BookClubFormView()
-                }
-            }
+                        switch destination {
+                            case .bookClubForm:
+                                BookClubFormView(bookClubViewModel: bookClubViewModel)
+                        }
+                    }
             .onAppear {
                 Task {
                     await bookClubViewModel.fetchAllBookClubs()

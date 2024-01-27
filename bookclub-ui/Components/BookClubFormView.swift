@@ -1,8 +1,8 @@
 import SwiftUI
-import FirebaseFirestoreSwift 
+import FirebaseFirestoreSwift
 
 struct BookClubFormView: View {
-    @StateObject private var bookClubViewModel = BookClubViewModel()  
+    @ObservedObject var bookClubViewModel: BookClubViewModel  // Expecting to be initialized from outside
 
     @State private var name: String = ""
     @State private var description: String = ""
@@ -12,14 +12,14 @@ struct BookClubFormView: View {
     private var bookClubId: String?
     private var isEditMode: Bool
     
-      init(bookClub: BookClub? = nil) {
-          _name = State(initialValue: bookClub?.name ?? "")
-          _description = State(initialValue: bookClub?.description ?? "")
-          _nextMeetingDate = State(initialValue: bookClub?.nextMeetingDate ?? Date())
-          bookClubId = bookClub?.id
-          isEditMode = (bookClub != nil)
-      }
-
+    init(bookClubViewModel: BookClubViewModel, bookClub: BookClub? = nil) {
+        self.bookClubViewModel = bookClubViewModel
+        _name = State(initialValue: bookClub?.name ?? "")
+        _description = State(initialValue: bookClub?.description ?? "")
+        _nextMeetingDate = State(initialValue: bookClub?.nextMeetingDate ?? Date())
+        bookClubId = bookClub?.id
+        isEditMode = (bookClub != nil)
+    }
     var body: some View {
         NavigationView {
             Form {
