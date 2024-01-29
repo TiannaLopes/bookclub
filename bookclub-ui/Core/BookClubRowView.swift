@@ -18,19 +18,6 @@ struct BookClubRowView: View {
                     .padding(0)
 
                 Spacer()
-
-                Button(action: {
-                    Task {
-                      try await bookClubViewModel.joinBookClub(bookClubId: club.id)
-                    }
-                }) {
-                    Text("Join")
-                        .font(.headline)
-                        .foregroundColor(darkMaroon)
-                        .padding(8) 
-                        .background(paleYellow)
-                        .cornerRadius(15.0)
-                }
             }
 
             Text(club.description)
