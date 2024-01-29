@@ -1,10 +1,3 @@
-//
-//  BookClubViewModel.swift
-//  bookclub-ui
-//
-//  Created by Tianna Alina Lopes on 1/12/24.
-//
-
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
@@ -14,13 +7,26 @@ class BookClubViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     @Published var bookClubs: [BookClub] = []
-    @Published var myBookClubs: [BookClub] = [] 
+    @Published var myBookClubs: [BookClub] = []
 
-    // Create a book club
+    init() {
+        self.userSession = Auth.auth().currentUser
+        fetchUser()
+    }
+
+    func fetchUser() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let ref = Firestore.firestore().collection("users").document(userId)
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.currentUser = try? document.data(as: User.self)
+            }
+        }
+    }
+
     func createBookClub(name: String, description: String, nextMeetingDate: Date, owner: String, locationName: String, latitude: Double, longitude: Double) async throws {
-        // Create a new BookClub instance with all parameters
         let newBookClub = BookClub(
-            id: UUID().uuidString, // Generate a unique ID for the book club
+            id: UUID().uuidString,
             name: name,
             description: description,
             owner: owner,
@@ -31,123 +37,111 @@ class BookClubViewModel: ObservableObject {
         )
 
         do {
-            // Encode the new BookClub instance to a dictionary suitable for Firestore
             let encodedBookClub = try Firestore.Encoder().encode(newBookClub)
-            // Save the new book club to Firestore
             try await Firestore.firestore().collection("bookclubs").document(newBookClub.id).setData(encodedBookClub)
-            print("Book club created successfully")
         } catch {
-            print("Failed to create book club with error: \(error.localizedDescription)")
             throw error
         }
     }
 
-    
-    // Delete a book club
     func deleteBookClub(bookClubId: String) async throws {
         do {
             try await Firestore.firestore().collection("bookclubs").document(bookClubId).delete()
-            print("Book club deleted successfully")
         } catch {
-            print("Failed to delete book club with error: \(error.localizedDescription)")
             throw error
         }
     }
-    
-    // Update book club details
+
     func updateBookClub(bookClubId: String, newDetails: [String: Any]) async throws {
         do {
             try await Firestore.firestore().collection("bookclubs").document(bookClubId).updateData(newDetails)
-            print("Book club updated successfully")
         } catch {
-            print("Failed to update book club with error: \(error.localizedDescription)")
             throw error
         }
     }
-    
-    // Join a book club
-    func joinBookClub(bookClubId: String) async throws {
-        guard let userId = currentUser?.id else { return }
 
-        // Add user to the attendees list of the book club
-        let attendeesUpdate = FieldValue.arrayUnion([userId])
+    func joinBookClub(bookClubId: String, userId: String) async throws {
+        guard let userId = self.currentUser?.id else { return }
+        let userRef = Firestore.firestore().collection("users").document(userId)
+        do {
+            _ = try await Firestore.firestore().runTransaction { transaction, errorPointer -> Any? in
+                let userDocument: DocumentSnapshot
+                do {
+                    userDocument = try transaction.getDocument(userRef)
+                } catch let fetchError as NSError {
+                    errorPointer?.pointee = fetchError
+                    return nil
+                }
+
+                var joinedBookclubs = userDocument.data()?["joinedBookclubs"] as? [String] ?? []
+                if !joinedBookclubs.contains(bookClubId) {
+                    joinedBookclubs.append(bookClubId)
+                    transaction.updateData(["joinedBookclubs": joinedBookclubs], forDocument: userRef)
+                }
+
+                return nil
+            }
+        } catch {
+            print("Error joining book club: \(error.localizedDescription)")
+            throw error
+        }
+    }
+
+
+
+    func leaveBookClub(bookClubId: String) async throws {
+        guard let userId = currentUser?.id else { return }
+        let attendeesUpdate = FieldValue.arrayRemove([userId])
         do {
             try await Firestore.firestore().collection("bookclubs").document(bookClubId).updateData(["attendees": attendeesUpdate])
-            print("Joined book club successfully")
         } catch {
-            print("Failed to join book club with error: \(error.localizedDescription)")
             throw error
         }
     }
-    
-    // Leave a book club
-    func
-leaveBookClub(bookClubId: String) async throws {
-guard let userId = currentUser?.id else { return }
-    // Remove user from the attendees list of the book club
-    let attendeesUpdate = FieldValue.arrayRemove([userId])
-    do {
-        try await Firestore.firestore().collection("bookclubs").document(bookClubId).updateData(["attendees": attendeesUpdate])
-        print("Left book club successfully")
-    } catch {
-        print("Failed to leave book club with error: \(error.localizedDescription)")
-        throw error
-    }
-}
 
-    
-    // Fetch details of a specific book club using a completion handler
     func fetchBookClub(bookClubId: String, completion: @escaping (BookClub?) -> Void) {
-        Firestore.firestore().collection("bookclubs").document(bookClubId).getDocument { documentSnapshot, error in
-            if let error = error {
-                print("Error fetching book club: \(error)")
-                completion(nil)
-                return
-            }
-
-            guard let documentSnapshot = documentSnapshot, documentSnapshot.exists else {
-                print("Document does not exist.")
-                completion(nil)
-                return
-            }
-
-            do {
-                let bookClub = try documentSnapshot.data(as: BookClub.self)
+        let ref = Firestore.firestore().collection("bookclubs").document(bookClubId)
+        ref.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let bookClub = try? document.data(as: BookClub.self)
                 completion(bookClub)
-            } catch {
-                print("Error decoding book club: \(error)")
+            } else {
                 completion(nil)
             }
         }
     }
-    
-    // Fetch book clubs where the current user is an attendee
-       func fetchMyBookClubs() async {
-           guard let userId = currentUser?.id else { return }
 
-           do {
-               let querySnapshot = try await Firestore.firestore().collection("bookclubs")
-                   .whereField("attendees", arrayContains: userId)
-                   .getDocuments()
-               
-               self.myBookClubs = querySnapshot.documents.compactMap { document -> BookClub? in
-                   try? document.data(as: BookClub.self)
-               }
-           } catch {
-               print("Error fetching my book clubs: \(error)")
-           }
-       }
-       
+    func fetchAllBookClubs() async {
+        let querySnapshot = try? await Firestore.firestore().collection("bookclubs").getDocuments()
+        self.bookClubs = querySnapshot?.documents.compactMap { try? $0.data(as: BookClub.self) } ?? []
+    }
 
-    // Fetch all book clubs from the database
-      func fetchAllBookClubs() async {
-          do {
-              let querySnapshot = try await Firestore.firestore().collection("bookclubs").getDocuments()
-              self.bookClubs = querySnapshot.documents.compactMap { document -> BookClub? in
-                  try? document.data(as: BookClub.self)
-              }
-          } catch {
-              print("Error fetching book clubs: \(error)")
-          }
-      }
+    func fetchMyBookClubs() async {
+        guard let userId = currentUser?.id else { return }
+
+        do {
+            let userDocument = try await Firestore.firestore().collection("users").document(userId).getDocument()
+            if let user = try? userDocument.data(as: User.self) {
+                // Safely unwrap `joinedBookclubs` or provide an empty array as a fallback
+                let bookClubIds = user.joinedBookclubs ?? []
+
+                var bookClubs: [BookClub] = []
+                for id in bookClubIds {
+                    let bookClubDocument = try await Firestore.firestore().collection("bookclubs").document(id).getDocument()
+                    if let bookClub = try? bookClubDocument.data(as: BookClub.self) {
+                        bookClubs.append(bookClub)
+                    }
+                }
+
+                DispatchQueue.main.async {
+                    self.myBookClubs = bookClubs
+                }
+            }
+        } catch {
+            print("Error fetching my book clubs: \(error.localizedDescription)")
+        }
+    }
+
+
+
 }

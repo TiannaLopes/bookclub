@@ -2,13 +2,13 @@ import SwiftUI
 
 struct MyBookClubsView: View {
     @StateObject private var bookClubViewModel = BookClubViewModel()
-
+    
     let darkMaroon = Color(hex: "3D0814")
     let paleYellow = Color(hex: "E7F9A9")
     let oliveGreen = Color(hex: "C9D3BE")
     let tan = Color(hex: "CDBB9E")
     let offWhite = Color(hex: "FDFDFD")
-
+    
     var body: some View {
         ZStack {
             oliveGreen.edgesIgnoringSafeArea(.all)
@@ -17,7 +17,7 @@ struct MyBookClubsView: View {
                     .font(.largeTitle)
                     .foregroundColor(darkMaroon)
                     .padding()
-
+                
                 List {
                     ForEach(bookClubViewModel.myBookClubs) { bookClub in
                         NavigationLink(destination: BookClubDetailView(bookClub: bookClub, bookClubViewModel: bookClubViewModel)) {
@@ -30,10 +30,10 @@ struct MyBookClubsView: View {
                 }
                 .listStyle(GroupedListStyle())
             }
-        }
-        .onAppear {
-            Task {
-                await bookClubViewModel.fetchMyBookClubs()
+            .onAppear {
+                Task {
+                    await bookClubViewModel.fetchMyBookClubs()
+                }
             }
         }
     }
