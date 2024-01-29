@@ -14,8 +14,7 @@ class BookClubViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     @Published var bookClubs: [BookClub] = []
-    
-
+    @Published var myBookClubs: [BookClub] = [] 
 
     // Create a book club
     func createBookClub(name: String, description: String, nextMeetingDate: Date, owner: String, locationName: String, latitude: Double, longitude: Double) async throws {
@@ -122,18 +121,23 @@ guard let userId = currentUser?.id else { return }
         }
     }
     
-    // Get list of book clubs the user has joined
-    func getListOfBookClubsUserHasJoined() async throws -> [BookClub] {
-        guard let userId = currentUser?.id else { return [] }
+    // Fetch book clubs where the current user is an attendee
+       func fetchMyBookClubs() async {
+           guard let userId = currentUser?.id else { return }
 
-        let querySnapshot = try await Firestore.firestore().collection("bookclubs")
-            .whereField("attendees", arrayContains: userId)
-            .getDocuments()
-        let bookClubs = querySnapshot.documents.compactMap { document -> BookClub? in
-            try? document.data(as: BookClub.self)
-        }
-        return bookClubs
-    }
+           do {
+               let querySnapshot = try await Firestore.firestore().collection("bookclubs")
+                   .whereField("attendees", arrayContains: userId)
+                   .getDocuments()
+               
+               self.myBookClubs = querySnapshot.documents.compactMap { document -> BookClub? in
+                   try? document.data(as: BookClub.self)
+               }
+           } catch {
+               print("Error fetching my book clubs: \(error)")
+           }
+       }
+       
 
     // Fetch all book clubs from the database
       func fetchAllBookClubs() async {

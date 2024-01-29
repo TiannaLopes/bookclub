@@ -1,7 +1,7 @@
 
 import SwiftUI
 import FirebaseFirestore
-
+import MapKit
 
 struct BookClubDetailView: View {
     @ObservedObject private var bookClubViewModel: BookClubViewModel
@@ -24,67 +24,67 @@ struct BookClubDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 if hasJoined {
-                                    Button(action: {
-                                        Task {
-                                            try await bookClubViewModel.leaveBookClub(bookClubId: bookClub.id)
-                                            hasJoined = false
-                                        }
-                                    }) {
-                                        Text("Leave")
-                                            .font(.headline)
-                                            .foregroundColor(darkMaroon)
-                                            .padding(8)
-                                            .background(paleYellow)
-                                            .cornerRadius(15.0)
-                                    }
-                                } else {
-                                    Button(action: {
-                                        Task {
-                                            try await bookClubViewModel.joinBookClub(bookClubId: bookClub.id)
-                                            hasJoined = true
-                                        }
-                                    }) {
-                                        Text("Join")
-                                            .font(.headline)
-                                            .foregroundColor(darkMaroon)
-                                            .padding(8)
-                                            .background(paleYellow)
-                                            .cornerRadius(15.0)
-                                    }
-                                }
+                    Button(action: {
+                        Task {
+                            try await bookClubViewModel.leaveBookClub(bookClubId: bookClub.id)
+                            hasJoined = false
+                        }
+                    }) {
+                        Text("Leave")
+                            .font(.headline)
+                            .foregroundColor(darkMaroon)
+                            .padding(8)
+                            .background(paleYellow)
+                            .cornerRadius(15.0)
+                    }
+                } else {
+                    Button(action: {
+                        Task {
+                            try await bookClubViewModel.joinBookClub(bookClubId: bookClub.id)
+                            hasJoined = true
+                        }
+                    }) {
+                        Text("Join")
+                            .font(.headline)
+                            .foregroundColor(darkMaroon)
+                            .padding(8)
+                            .background(paleYellow)
+                            .cornerRadius(15.0)
+                    }
+                }
                 Button(action: {
                     Task {
-                       try await bookClubViewModel.deleteBookClub(bookClubId: bookClub.id)
+                        try await bookClubViewModel.deleteBookClub(bookClubId: bookClub.id)
                     }
                 }) {
-                   Text("Delete")
-                       .font(.headline)
-                       .foregroundColor(darkMaroon)
-                       .padding(8)
-                       .background(paleYellow)
-                       .cornerRadius(15.0)
-               }
+                    Text("Delete")
+                        .font(.headline)
+                        .foregroundColor(darkMaroon)
+                        .padding(8)
+                        .background(paleYellow)
+                        .cornerRadius(15.0)
+                }
                 NavigationLink(destination: BookClubFormView(bookClubViewModel: bookClubViewModel, bookClub: bookClub)) {
                     Text("Edit Book Club Details")
-                    .font(.headline)
-                    .foregroundColor(darkMaroon)
-                    .padding(8)
-                    .background(paleYellow)
-                    .cornerRadius(15.0)
+                        .font(.headline)
+                        .foregroundColor(darkMaroon)
+                        .padding(8)
+                        .background(paleYellow)
+                        .cornerRadius(15.0)
                 }
                 Image("bookClubImage")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-
+                
                 Text(bookClub.name)
                     .font(.title)
                     .foregroundColor(darkMaroon)
-
+                
                 Text(bookClub.description)
                     .font(.body)
                     .foregroundColor(darkMaroon)
                     .padding(.bottom)
-
+                
                 HStack {
                     Text("Next Meeting:")
                         .font(.headline)
@@ -94,20 +94,38 @@ struct BookClubDetailView: View {
                         .font(.subheadline)
                         .foregroundColor(darkMaroon)
                 }
-
-               
-
+                
+                
+                
                 Spacer()
-                     } .padding()
+            } .padding()
             
             if let latitude = bookClub.latitude, let longitude = bookClub.longitude {
-                MapView(latitude: latitude, longitude: longitude)
-                    .frame(height: 300)
-                    .cornerRadius(15)
-                    .padding()
+                VStack(alignment: .leading) {
+                    Text(bookClub.locationName ?? "Location")
+                        .font(.headline)
+                        .padding(.bottom, 5)
+                    
+                    MapView(latitude: latitude, longitude: longitude)
+                        .frame(height: 300)
+                        .cornerRadius(15)
+                        .padding(.bottom, 10)
+                    
+                    Button("Open in Apple Maps") {
+                        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                        let placemark = MKPlacemark(coordinate: coordinate)
+                        let mapItem = MKMapItem(placemark: placemark)
+                        mapItem.name = bookClub.locationName
+                        mapItem.openInMaps(launchOptions: nil)
+                    }
+                    .foregroundColor(.blue)
+                }
+                .padding()
             }
-           
+            
         }
+        
+    
         .navigationBarTitle(Text(bookClub.name), displayMode: .inline)
         .background(tan)
         .onAppear {

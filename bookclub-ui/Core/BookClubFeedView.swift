@@ -1,12 +1,8 @@
 import SwiftUI
 
-enum NavigationDestination {
-    case bookClubForm
-}
-
 struct BookClubFeedView: View {
     @StateObject private var bookClubViewModel = BookClubViewModel()
-    @State private var navigationSelection: NavigationDestination?
+    @State private var showingBookClubForm = false // Use a simple Boolean flag for navigation
 
     let darkMaroon = Color(hex: "3D0814")
     let paleYellow = Color(hex: "E7F9A9")
@@ -15,12 +11,13 @@ struct BookClubFeedView: View {
     let offWhite = Color(hex: "FDFDFD")
 
     var body: some View {
-        NavigationStack {
+        NavigationStack { // Using NavigationStack for SwiftUI 3.0 and above. Use NavigationView for earlier versions
             ZStack {
                 oliveGreen.edgesIgnoringSafeArea(.all)
                 VStack {
+                    // Button to trigger navigation to the book club form
                     Button("Create Bookclub") {
-                        navigationSelection = .bookClubForm
+                        showingBookClubForm = true // Toggle the flag to show the form
                     }
                     .font(.headline)
                     .foregroundColor(darkMaroon)
@@ -29,6 +26,7 @@ struct BookClubFeedView: View {
                     .cornerRadius(15.0)
                     .padding(.top)
 
+                    // List of book clubs
                     List {
                         ForEach(bookClubViewModel.bookClubs) { bookClub in
                             NavigationLink(destination: BookClubDetailView(bookClub: bookClub, bookClubViewModel: bookClubViewModel)) {
@@ -44,12 +42,10 @@ struct BookClubFeedView: View {
                     .cornerRadius(10)
                 }
             }
-            .navigationDestination(for: NavigationDestination.self) { destination in
-                        switch destination {
-                            case .bookClubForm:
-                                BookClubFormView(bookClubViewModel: bookClubViewModel)
-                        }
-                    }
+            // This NavigationLink becomes active when showingBookClubForm is true
+            .navigationDestination(isPresented: $showingBookClubForm) {
+                BookClubFormView(bookClubViewModel: bookClubViewModel)
+            }
             .onAppear {
                 Task {
                     await bookClubViewModel.fetchAllBookClubs()
@@ -57,6 +53,13 @@ struct BookClubFeedView: View {
             }
         }
         .navigationTitle("Book Clubs")
+    }
+}
+
+
+extension BookClubFeedView {
+    static var previews: some View {
+        BookClubFeedView()
     }
 }
 

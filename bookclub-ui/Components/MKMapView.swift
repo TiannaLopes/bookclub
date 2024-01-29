@@ -4,7 +4,6 @@
 //
 //  Created by Tianna Alina Lopes on 1/29/24.
 //
-
 import SwiftUI
 import MapKit
 
@@ -28,7 +27,6 @@ struct MapView: UIViewRepresentable {
         // Add new annotation
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        annotation.title = "Meeting Location"
         uiView.addAnnotation(annotation)
     }
 }
