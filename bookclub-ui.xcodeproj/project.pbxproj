@@ -22,6 +22,7 @@
 		5F32D9092B4F254500017D91 /* BookClubEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D9082B4F254500017D91 /* BookClubEvent.swift */; };
 		5F32D90B2B4F255B00017D91 /* BookClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D90A2B4F255B00017D91 /* BookClub.swift */; };
 		5F32D90D2B4F261B00017D91 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F32D90C2B4F261B00017D91 /* ColorExtensions.swift */; };
+		5F3AE5942B6800B7004F8887 /* MKMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AE5932B6800B7004F8887 /* MKMapView.swift */; };
 		5F7747422B4F2BCB00391CC6 /* BookClubRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747412B4F2BCB00391CC6 /* BookClubRowView.swift */; };
 		5F7747462B4F6EAD00391CC6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747452B4F6EAD00391CC6 /* MainView.swift */; };
 		5F77474F2B505B2100391CC6 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77474E2B505B2100391CC6 /* InputView.swift */; };
@@ -36,6 +37,20 @@
 		5F7747682B51E60C00391CC6 /* BookClubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7747672B51E60C00391CC6 /* BookClubViewModel.swift */; };
 		5F77476C2B54554100391CC6 /* BookClubFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77476B2B54554100391CC6 /* BookClubFormView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		5F3AE5952B6805A0004F8887 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		5F32D8C92B4D8CF900017D91 /* PBXContainerItemProxy */ = {
@@ -73,6 +88,7 @@
 		5F32D9082B4F254500017D91 /* BookClubEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClubEvent.swift; sourceTree = "<group>"; };
 		5F32D90A2B4F255B00017D91 /* BookClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClub.swift; sourceTree = "<group>"; };
 		5F32D90C2B4F261B00017D91 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		5F3AE5932B6800B7004F8887 /* MKMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapView.swift; sourceTree = "<group>"; };
 		5F7747412B4F2BCB00391CC6 /* BookClubRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClubRowView.swift; sourceTree = "<group>"; };
 		5F7747452B4F6EAD00391CC6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5F77474E2B505B2100391CC6 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -198,6 +214,7 @@
 				5F77474E2B505B2100391CC6 /* InputView.swift */,
 				5F7747522B50660000391CC6 /* SettingRowView.swift */,
 				5F77476B2B54554100391CC6 /* BookClubFormView.swift */,
+				5F3AE5932B6800B7004F8887 /* MKMapView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -278,6 +295,7 @@
 				5F32D8B62B4D8CF700017D91 /* Resources */,
 			);
 			buildRules = (
+				5F3AE5952B6805A0004F8887 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -418,6 +436,7 @@
 				5F7747512B5063B200391CC6 /* ProfileView.swift in Sources */,
 				5F32D90B2B4F255B00017D91 /* BookClub.swift in Sources */,
 				5F32D9072B4F24BA00017D91 /* User.swift in Sources */,
+				5F3AE5942B6800B7004F8887 /* MKMapView.swift in Sources */,
 				5F32D8BC2B4D8CF700017D91 /* bookclub_uiApp.swift in Sources */,
 				5F32D9012B4EF37000017D91 /* MyBookClubsView.swift in Sources */,
 				5F7747622B506F1400391CC6 /* AuthViewModel.swift in Sources */,
@@ -579,12 +598,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bookclub-ui/Preview Content\"";
 				DEVELOPMENT_TEAM = 2PH8ZSJ4V2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Met At Bookclub";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -599,7 +621,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -608,12 +630,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bookclub-ui/Preview Content\"";
 				DEVELOPMENT_TEAM = 2PH8ZSJ4V2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Met At Bookclub";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -628,7 +653,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

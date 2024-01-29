@@ -1,5 +1,7 @@
 
 import SwiftUI
+import FirebaseFirestore
+
 
 struct BookClubDetailView: View {
     @ObservedObject private var bookClubViewModel: BookClubViewModel
@@ -96,8 +98,15 @@ struct BookClubDetailView: View {
                
 
                 Spacer()
-                     }
-            .padding()
+                     } .padding()
+            
+            if let latitude = bookClub.latitude, let longitude = bookClub.longitude {
+                MapView(latitude: latitude, longitude: longitude)
+                    .frame(height: 300)
+                    .cornerRadius(15)
+                    .padding()
+            }
+           
         }
         .navigationBarTitle(Text(bookClub.name), displayMode: .inline)
         .background(tan)

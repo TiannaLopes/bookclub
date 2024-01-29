@@ -14,14 +14,27 @@ class BookClubViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     @Published var bookClubs: [BookClub] = []
+    
 
 
     // Create a book club
-    func createBookClub(name: String, description: String, nextMeetingDate: Date, owner: String) async throws {
-        let newBookClub = BookClub(id: UUID().uuidString, name: name, description: description, owner: owner, nextMeetingDate: nextMeetingDate)
+    func createBookClub(name: String, description: String, nextMeetingDate: Date, owner: String, locationName: String, latitude: Double, longitude: Double) async throws {
+        // Create a new BookClub instance with all parameters
+        let newBookClub = BookClub(
+            id: UUID().uuidString, // Generate a unique ID for the book club
+            name: name,
+            description: description,
+            owner: owner,
+            nextMeetingDate: nextMeetingDate,
+            locationName: locationName,
+            latitude: latitude,
+            longitude: longitude
+        )
 
         do {
+            // Encode the new BookClub instance to a dictionary suitable for Firestore
             let encodedBookClub = try Firestore.Encoder().encode(newBookClub)
+            // Save the new book club to Firestore
             try await Firestore.firestore().collection("bookclubs").document(newBookClub.id).setData(encodedBookClub)
             print("Book club created successfully")
         } catch {
@@ -29,6 +42,7 @@ class BookClubViewModel: ObservableObject {
             throw error
         }
     }
+
     
     // Delete a book club
     func deleteBookClub(bookClubId: String) async throws {

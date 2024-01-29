@@ -6,7 +6,10 @@ struct BookClub: Identifiable, Codable {
     let description: String
     var owner: String
     let nextMeetingDate: Date
-    var attendees: [String]? 
+    var attendees: [String]?
+    var locationName: String?
+     var latitude: Double? 
+     var longitude: Double?
     
     static var mockData: [BookClub] {
         [
