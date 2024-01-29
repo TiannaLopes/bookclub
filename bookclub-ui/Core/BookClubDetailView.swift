@@ -23,22 +23,26 @@ struct BookClubDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
-                joinLeaveButton
-                deleteButton
-                editButton
-                bookClubImage
-                bookClubDetails
-                locationDetails
+                    VStack(alignment: .leading, spacing: 0) { 
+                        joinLeaveButton
+                        deleteButton
+                        editButton
+//                        bookClubImage
+//                            .padding(.bottom, 5)
+                        bookClubDetails
+                            .padding(.bottom, 5)
+                        locationDetails
+                    }
+                    .padding([.horizontal, .top])
+                    .navigationBarTitle(Text(bookClub.name), displayMode: .inline)
+                    .background(tan)
+                    .onAppear {
+                        checkIfUserHasJoined()
+                    }
+                }
             }
-            .padding()
-            .navigationBarTitle(Text(bookClub.name), displayMode: .inline)
-            .background(tan)
-            .onAppear {
-                checkIfUserHasJoined()
-            }
-        }
-    }
+
+    
 
     private var joinLeaveButton: some View {
         Button(action: {
@@ -89,11 +93,11 @@ struct BookClubDetailView: View {
         }
     }
 
-    private var bookClubImage: some View {
-        Image("bookClubImage") // Assuming you have a placeholder image named "bookClubImage"
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-    }
+//    private var bookClubImage: some View {
+//        Image("bookClubImage") // Assuming you have a placeholder image named "bookClubImage"
+//            .resizable()
+//            .aspectRatio(contentMode: .fit)
+//    }
 
     private var bookClubDetails: some View {
         VStack(alignment: .leading, spacing: 5) {
@@ -117,30 +121,31 @@ struct BookClubDetailView: View {
             }
         }
     }
-
+    
     private var locationDetails: some View {
-        VStack(alignment: .leading) {
-            if let latitude = bookClub.latitude, let longitude = bookClub.longitude {
-                Text(bookClub.locationName ?? "Location")
-                    .font(.headline)
-                    .padding(.bottom, 5)
+           Group {
+               if let latitude = bookClub.latitude, let longitude = bookClub.longitude {
+                   Text(bookClub.locationName ?? "Location")
+                       .font(.headline)
+                       .padding(.vertical, 5) // Added vertical padding to separate text from the map
 
-                MapView(latitude: latitude, longitude: longitude)
-                    .frame(height: 300)
-                    .cornerRadius(15)
-                    .padding(.bottom, 10)
+                   MapView(latitude: latitude, longitude: longitude)
+                       .frame(height: 300)
+                       .cornerRadius(15)
 
-                Button("Open in Apple Maps") {
-                    let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                    let placemark = MKPlacemark(coordinate: coordinate)
-                    let mapItem = MKMapItem(placemark: placemark)
-                    mapItem.name = bookClub.locationName
-                    mapItem.openInMaps(launchOptions: nil)
-                }
-                .foregroundColor(.blue)
-            }
-        }
-    }
+                   Button("Open in Apple Maps") {
+                       let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                       let placemark = MKPlacemark(coordinate: coordinate)
+                       let mapItem = MKMapItem(placemark: placemark)
+                       mapItem.name = bookClub.locationName
+                       mapItem.openInMaps(launchOptions: nil)
+                   }
+                   .foregroundColor(.blue)
+                   .padding(.top, 5) // Added top padding to separate button from the map
+               }
+           }
+           .padding(.bottom, 10) // Keep bottom padding to separate location details from the rest of the content
+       }
 
     private func checkIfUserHasJoined() {
         hasJoined = bookClub.attendees?.contains(authViewModel.currentUser?.id ?? "") ?? false
