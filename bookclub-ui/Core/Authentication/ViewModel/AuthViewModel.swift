@@ -63,12 +63,19 @@ class AuthViewModel: ObservableObject{
         
     }
     
-    func fetchUser() async{
-        guard let  uid = Auth.auth().currentUser?.uid else {return}
-        
-        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else {return}
-                self.currentUser = try? snapshot.data(as: User.self)
-        
-        print("Current user is: \(String(describing: self.currentUser))")
+    func fetchUser() async {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        do {
+            let documentSnapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
+            let user = try documentSnapshot.data(as: User.self)  // No need for 'guard let' here
+            DispatchQueue.main.async {
+                self.currentUser = user
+            }
+            print("Current user is: \(user)")
+        } catch {
+            print("Error fetching user: \(error.localizedDescription)")
+        }
     }
+
 }

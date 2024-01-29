@@ -33,9 +33,9 @@ struct SignUpView: View {
                 InputView(text: $lastName, title: "Last Name", placeholder: "Enter your last name")
 
                 InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
-
+                
                 InputView(text: $confirmPassword, title: "Confirm Password", placeholder: "Confirm your password", isSecureField: true)
-
+                
                 Button(action: {
                     Task {
                         try await viewModel.createUser(withEmail: email, password: password, firstName: firstName, lastName: lastName)

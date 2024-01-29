@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct BookClubRowView: View {
+    @StateObject private var bookClubViewModel = BookClubViewModel()
     var club: BookClub
-    // Define your color palette
     let darkMaroon = Color(hex: "3D0814")
     let paleYellow = Color(hex: "E7F9A9")
     let oliveGreen = Color(hex: "C9D3BE")
@@ -11,9 +11,15 @@ struct BookClubRowView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(club.name)
-                .foregroundColor(.primary)
-                .font(.headline)
+            HStack {
+                Text(club.name)
+                    .foregroundColor(.primary)
+                    .font(.headline)
+                    .padding(0)
+
+                Spacer()
+            }
+
             Text(club.description)
                 .foregroundColor(.secondary)
                 .font(.subheadline)
@@ -26,3 +32,4 @@ struct BookClubRowView: View {
         .shadow(radius: 5)
     }
 }
+
